@@ -1,0 +1,7 @@
+body { margin:0; font-family: Arial, sans-serif; }
+header { display:flex; justify-content:space-between; padding:20px; background:#333; color:white; }
+nav ul { display:flex; list-style:none; }
+nav ul li { margin-left:20px; }
+.hero-text { position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); color:white; text-align:center; }
+.product-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:20px; padding:20px; }
+.product-card { border:1px solid #ccc; padding:10px; text-align:center; }
