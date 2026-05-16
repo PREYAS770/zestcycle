@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zest Bicycles — Ride The Zest</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   RESET & ROOT
+═══════════════════════════════════════ */
+:root{
+  --green:#4caf28; --green-d:#2a7a10; --green-dd:#1a5c1a;
+  --orange:#f07820; --gold:#d4a820;
+  --dark:#111811; --darker:#0a1008; --card:#161e14;
+  --white:#f5f5f0; --gray:#888; --border:rgba(76,175,40,0.15);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Exo 2',sans-serif;background:#fff;color:#111;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:#f0f0f0}
+::-webkit-scrollbar-thumb{background:var(--green);border-radius:2px}
+
+/* ═══════════════════════════════════════
+   TOP SOCIAL BAR
+═══════════════════════════════════════ */
+.top-bar{
+  background:var(--darker);
+  padding:7px 4vw;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:.75rem;letter-spacing:.06em;
+  position:relative;z-index:200;
+  border-bottom:1px solid rgba(76,175,40,0.2);
+}
+.top-left{color:rgba(255,255,255,.55);display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap}
+.top-left span{display:flex;align-items:center;gap:5px}
+.top-left a{color:rgba(255,255,255,.55);transition:color .2s}
+.top-left a:hover{color:var(--green)}
+.top-socials{display:flex;align-items:center;gap:.5rem}
+.top-socials a{
+  width:26px;height:26px;border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.72rem;font-weight:700;letter-spacing:0;
+  transition:all .22s;border:1px solid rgba(255,255,255,.08);
+  color:rgba(255,255,255,.7);
+}
+.top-socials a:hover{transform:translateY(-2px)}
+.soc-fb{background:#1877f2} .soc-fb:hover{background:#0d6efd}
+.soc-ig{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.soc-yt{background:#ff0000} .soc-yt:hover{background:#cc0000}
+.soc-tw{background:#1da1f2} .soc-tw:hover{background:#0c90e1}
+.soc-wa{background:#25d366} .soc-wa:hover{background:#1aab57}
+.top-divider{width:1px;height:14px;background:rgba(255,255,255,.12);margin:0 .4rem}
+
+/* ═══════════════════════════════════════
+   MAIN NAV
+═══════════════════════════════════════ */
+nav{
+  position:sticky;top:0;z-index:190;
+  background:#fff;
+  box-shadow:0 2px 20px rgba(0,0,0,.08);
+  border-bottom:2px solid var(--green);
+}
+.nav-inner{
+  max-width:1300px;margin:0 auto;padding:0 4vw;
+  height:66px;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+}
+.nav-logo img{height:46px;width:auto;object-fit:contain}
+.nav-links{display:flex;align-items:center;gap:0;list-style:none}
+.nav-links a{
+  display:block;padding:22px 16px;
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.88rem;
+  letter-spacing:.1em;text-transform:uppercase;color:#333;
+  position:relative;transition:color .25s;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:0;left:16px;right:16px;height:3px;
+  background:var(--green);transform:scaleX(0);transition:transform .3s;border-radius:2px 2px 0 0;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--green)}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-right{display:flex;align-items:center;gap:.7rem}
+.nav-icon-btn{
+  width:38px;height:38px;border-radius:8px;background:#f5f5f5;border:1px solid #e8e8e8;
+  display:flex;align-items:center;justify-content:center;font-size:1rem;cursor:pointer;transition:all .2s;
+  position:relative;
+}
+.nav-icon-btn:hover{background:var(--green);color:#fff;border-color:var(--green)}
+.cart-count{
+  position:absolute;top:-6px;right:-6px;width:18px;height:18px;
+  background:var(--orange);color:#fff;border-radius:50%;
+  font-size:.6rem;font-weight:700;display:flex;align-items:center;justify-content:center;
+  border:2px solid #fff;
+}
+.btn-shop-nav{
+  background:linear-gradient(135deg,var(--green),var(--green-d));
+  color:#fff;padding:9px 20px;border-radius:6px;border:none;cursor:pointer;
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;
+  transition:all .25s;white-space:nowrap;
+}
+.btn-shop-nav:hover{background:linear-gradient(135deg,var(--orange),var(--gold));transform:translateY(-1px);box-shadow:0 6px 18px rgba(240,120,32,.3)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none}
+.hamburger span{display:block;width:22px;height:2px;background:var(--green);border-radius:2px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mob-menu{
+  display:none;background:#fff;border-bottom:2px solid var(--green);
+  padding:1rem 4vw 1.5rem;
+}
+.mob-menu.open{display:block}
+.mob-menu a{display:block;padding:.7rem 0;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.1em;text-transform:uppercase;color:#333;border-bottom:1px solid #f0f0f0;transition:color .2s}
+.mob-menu a:hover{color:var(--green)}
+
+/* ═══════════════════════════════════════
+   HERO SLIDER
+═══════════════════════════════════════ */
+.hero{
+  position:relative;overflow:hidden;
+  height:clamp(420px,70vh,680px);
+  background:var(--darker);
+}
+.slide{
+  position:absolute;inset:0;
+  display:flex;align-items:center;
+  opacity:0;transition:opacity .8s ease;pointer-events:none;
+}
+.slide.active{opacity:1;pointer-events:auto}
+.slide-bg{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+  filter:brightness(.45);transition:transform 8s ease;
+}
+.slide.active .slide-bg{transform:scale(1.05)}
+.slide-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(110deg,rgba(10,16,8,.92) 38%,rgba(10,16,8,.2) 80%);
+}
+.slide-content{
+  position:relative;z-index:2;padding:0 8vw;max-width:620px;
+}
+.slide-tag{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(76,175,40,.15);border:1px solid rgba(76,175,40,.4);
+  border-radius:100px;padding:5px 14px;
+  font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--green);
+  margin-bottom:1.2rem;
+}
+.slide-tag i{width:5px;height:5px;background:var(--green);border-radius:50%;animation:blink 1.4s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.slide h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3rem,7vw,6rem);line-height:.95;letter-spacing:.02em;color:#fff;
+  margin-bottom:.8rem;
+}
+.slide h1 span{
+  background:linear-gradient(120deg,var(--green) 0%,var(--orange) 60%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.slide p{color:rgba(255,255,255,.65);font-size:1rem;line-height:1.65;margin-bottom:2rem;max-width:400px}
+.slide-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:9px;
+  background:var(--green);color:#fff;
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:13px 26px;border-radius:6px;border:2px solid var(--green);
+  transition:all .28s;cursor:pointer;
+}
+.btn-primary:hover{background:var(--green-d);border-color:var(--green-d);transform:translateY(-2px);box-shadow:0 10px 28px rgba(76,175,40,.35)}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:9px;
+  background:transparent;color:#fff;
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:13px 26px;border-radius:6px;border:2px solid rgba(255,255,255,.3);
+  transition:all .28s;cursor:pointer;
+}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+/* hero right image */
+.slide-img{
+  position:absolute;right:6vw;bottom:0;z-index:2;
+  height:88%;display:flex;align-items:flex-end;
+  filter:drop-shadow(-20px 0 60px rgba(76,175,40,.25));
+  animation:heroFloat 5s ease-in-out infinite;
+}
+.slide-img img{height:100%;width:auto;object-fit:contain}
+@keyframes heroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+/* slider controls */
+.slider-arrow{
+  position:absolute;top:50%;z-index:10;transform:translateY(-50%);
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.1);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.2);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+  cursor:pointer;transition:all .25s;
+}
+.slider-arrow:hover{background:var(--green);border-color:var(--green)}
+.arrow-prev{left:20px}.arrow-next{right:20px}
+.slider-dots{
+  position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+  display:flex;gap:8px;z-index:10;
+}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer;transition:all .3s}
+.dot.active{background:var(--green);width:24px;border-radius:4px}
+
+/* ═══════════════════════════════════════
+   SECTION COMMON
+═══════════════════════════════════════ */
+.section{padding:70px 4vw}
+.sec-wrap{max-width:1300px;margin:0 auto}
+.sec-head{text-align:center;margin-bottom:2.8rem}
+.sec-tag-sm{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--green);margin-bottom:.5rem}
+.sec-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(1.6rem,3.5vw,2.4rem);color:#111;letter-spacing:.04em;text-transform:uppercase}
+.sec-title span{color:var(--green)}
+.sec-divider{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:.7rem}
+.sec-divider::before,.sec-divider::after{content:'';width:60px;height:1px;background:#ddd}
+.sec-divider .icon{font-size:.9rem;color:var(--green)}
+
+/* ═══════════════════════════════════════
+   CATEGORIES
+═══════════════════════════════════════ */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1.2rem}
+.cat-card{
+  background:#fff;border:1px solid #ebebeb;border-radius:12px;
+  padding:1.5rem 1rem 1.2rem;text-align:center;cursor:pointer;
+  transition:all .32s ease;position:relative;overflow:hidden;
+}
+.cat-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--green),var(--orange));
+  transform:scaleX(0);transform-origin:left;transition:transform .32s;
+}
+.cat-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.1);border-color:var(--green)}
+.cat-card:hover::after{transform:scaleX(1)}
+.cat-img{
+  width:100%;aspect-ratio:4/3;border-radius:8px;overflow:hidden;
+  background:#f8f8f8;margin-bottom:1rem;
+}
+.cat-img img{width:100%;height:100%;object-fit:cover;transition:transform .45s}
+.cat-card:hover .cat-img img{transform:scale(1.08)}
+.cat-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:#222;margin-bottom:.3rem}
+.cat-link{font-size:.78rem;color:var(--green);font-weight:600;display:inline-flex;align-items:center;gap:4px;transition:gap .25s}
+.cat-card:hover .cat-link{gap:8px}
+
+/* ═══════════════════════════════════════
+   FEATURED PRODUCTS
+═══════════════════════════════════════ */
+.products-sec{background:#0f1a0e;padding:70px 4vw}
+.prod-head-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem}
+.prod-head-row .sec-tag-sm{color:var(--green);text-align:left;margin:0}
+.prod-head-row .sec-title{color:#fff;text-align:left}
+.view-all{
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--green);display:inline-flex;align-items:center;gap:5px;
+  transition:gap .25s;
+}
+.view-all:hover{gap:10px}
+.prod-slider-wrap{position:relative}
+.prod-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:1.3rem;
+}
+.prod-card{
+  background:#1a251a;border:1px solid rgba(76,175,40,.12);border-radius:12px;
+  overflow:hidden;cursor:pointer;transition:all .32s;
+}
+.prod-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.5);border-color:rgba(76,175,40,.3)}
+.prod-img{position:relative;aspect-ratio:4/3;background:#131d11;overflow:hidden}
+.prod-img img{width:100%;height:100%;object-fit:cover;transition:transform .45s}
+.prod-card:hover .prod-img img{transform:scale(1.06)}
+.prod-badge{
+  position:absolute;top:10px;left:10px;
+  background:var(--green);color:#fff;
+  font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 9px;border-radius:3px;
+}
+.prod-badge.new{background:var(--orange)}
+.prod-badge.elec{background:#1a5cc8}
+.prod-wish{
+  position:absolute;top:10px;right:10px;
+  width:30px;height:30px;border-radius:50%;
+  background:rgba(20,30,18,.7);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;color:#aaa;transition:all .25s;cursor:pointer;
+}
+.prod-wish.liked{color:#f07820}
+.prod-wish:hover{background:rgba(240,120,32,.2);border-color:var(--orange)}
+.prod-body{padding:1.2rem}
+.prod-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.04em;text-transform:uppercase;color:#fff;margin-bottom:.3rem}
+.prod-stars{color:#f5a020;font-size:.8rem;margin-bottom:.5rem}
+.prod-stars span{color:#666;font-size:.72rem;margin-left:3px}
+.prod-price{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1rem;color:var(--green);margin-bottom:.9rem}
+.prod-price s{font-size:.82rem;color:#555;font-weight:400;margin-left:5px}
+.prod-actions{display:flex;gap:.5rem}
+.btn-details{flex:1;background:rgba(76,175,40,.08);border:1px solid rgba(76,175,40,.25);color:var(--green);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;padding:8px;border-radius:5px;cursor:pointer;transition:all .25s}
+.btn-details:hover{background:rgba(76,175,40,.18);border-color:var(--green)}
+.btn-cart{width:36px;height:36px;background:var(--green);border:none;border-radius:5px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;font-size:.9rem;flex-shrink:0}
+.btn-cart:hover{background:var(--orange);transform:scale(1.08)}
+
+/* ═══════════════════════════════════════
+   360° VIEWER SECTION
+═══════════════════════════════════════ */
+.viewer-sec{background:#f7faf5;padding:70px 4vw}
+.viewer-inner{
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;
+}
+.viewer-stage{
+  display:flex;flex-direction:column;align-items:center;
+  background:#fff;border-radius:20px;padding:2rem;
+  box-shadow:0 8px 40px rgba(0,0,0,.08);border:1px solid #e8f0e5;
+}
+.cycle-360{
+  width:100%;max-width:420px;position:relative;
+  cursor:grab;user-select:none;
+}
+.cycle-360:active{cursor:grabbing}
+.cycle-360 svg{width:100%;height:auto;transition:transform .05s linear}
+.viewer-controls{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:1.2rem}
+.color-dot{
+  width:28px;height:28px;border-radius:50%;cursor:pointer;
+  border:2px solid transparent;transition:all .25s;position:relative;
+}
+.color-dot.active{border-color:#333;transform:scale(1.15)}
+.color-dot.active::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.6rem;color:#fff;font-weight:700}
+.viewer-hint{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#999;margin-top:.7rem;display:flex;align-items:center;gap:6px}
+.rot-track{width:160px;height:4px;background:#e8e8e8;border-radius:2px;margin-top:.5rem;overflow:hidden}
+.rot-fill{height:100%;width:30px;background:linear-gradient(90deg,var(--green),var(--orange));border-radius:2px;transition:margin-left .06s linear}
+.viewer-info h3{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.6rem;letter-spacing:.04em;text-transform:uppercase;color:#111;margin-bottom:.6rem}
+.viewer-info h3 span{color:var(--green)}
+.viewer-info p{color:#666;font-size:.95rem;line-height:1.7;margin-bottom:1.5rem}
+.spec-list{display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.5rem}
+.spec-item{display:flex;align-items:center;gap:10px;font-size:.88rem}
+.spec-icon{width:32px;height:32px;background:#f0f8ec;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.spec-label{color:#999;width:100px}
+.spec-val{font-weight:700;color:#111}
+.selected-color-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-top:.5rem}
+
+/* ═══════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════ */
+.about-sec{background:#fff;padding:70px 4vw}
+.about-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.about-visual{position:relative}
+.about-main-img{border-radius:16px;overflow:hidden;aspect-ratio:4/3}
+.about-main-img img{width:100%;height:100%;object-fit:cover}
+.play-wrap{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  border-radius:16px;background:rgba(0,0,0,.15);
+}
+.play-btn{
+  width:64px;height:64px;background:rgba(76,175,40,.9);backdrop-filter:blur(8px);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .3s;border:3px solid rgba(255,255,255,.4);
+}
+.play-btn:hover{transform:scale(1.1);background:var(--green)}
+.play-btn svg{width:20px;fill:#fff;margin-left:3px}
+.about-badge{
+  position:absolute;bottom:-16px;right:-16px;
+  background:var(--green);color:#fff;border-radius:12px;padding:1rem 1.2rem;
+  box-shadow:0 8px 24px rgba(76,175,40,.35);border:3px solid #fff;
+}
+.about-badge .num{font-family:'Bebas Neue',sans-serif;font-size:2rem;line-height:1}
+.about-badge .lbl{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.about-info{}
+.about-icons{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.8rem}
+.aico{display:flex;align-items:center;gap:10px}
+.aico-box{width:44px;height:44px;border-radius:10px;background:#f0f8ec;border:1px solid #d8f0cc;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;transition:all .25s}
+.aico:hover .aico-box{background:var(--green);transform:scale(1.05)}
+.aico-text{}
+.aico-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:#222}
+.aico-sub{font-size:.75rem;color:#999}
+.btn-readmore{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;padding:12px 24px;border-radius:6px;margin-top:1.8rem;transition:all .28s;cursor:pointer;border:none}
+.btn-readmore:hover{background:var(--green-d);transform:translateY(-2px);box-shadow:0 8px 20px rgba(76,175,40,.3)}
+
+/* ═══════════════════════════════════════
+   STATS BAR
+═══════════════════════════════════════ */
+.stats-bar{
+  background:linear-gradient(135deg,var(--green-dd),var(--green-d),var(--green));
+  padding:40px 4vw;
+}
+.stats-inner{max-width:1000px;margin:0 auto;display:flex;justify-content:space-around;flex-wrap:wrap;gap:2rem}
+.stat-item{text-align:center;color:#fff}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;line-height:1}
+.stat-lbl{font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;opacity:.8;margin-top:2px}
+
+/* ═══════════════════════════════════════
+   CONTACT SECTION
+═══════════════════════════════════════ */
+.contact-sec{background:#f7faf5;padding:70px 4vw}
+.contact-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.biz-card{
+  background:#fff;border:1px solid #e0ede0;border-radius:16px;
+  overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.07);
+}
+.biz-card-top{
+  background:linear-gradient(135deg,var(--green-dd),var(--green));
+  padding:1.5rem;display:flex;align-items:center;gap:1rem;
+}
+.biz-card-top img{height:50px;width:auto;background:#fff;border-radius:7px;padding:4px 8px;object-fit:contain}
+.biz-card-name{color:#fff}
+.biz-card-name strong{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.06em;text-transform:uppercase;display:block}
+.biz-card-name span{font-size:.78rem;opacity:.8}
+.biz-card-body{padding:1.5rem;position:relative;overflow:hidden}
+.biz-stripe{position:absolute;bottom:-10px;right:-10px;width:50%;height:60%;opacity:.08;pointer-events:none}
+.contact-list{list-style:none;display:flex;flex-direction:column;gap:.85rem}
+.contact-list li{display:flex;align-items:center;gap:10px;font-size:.88rem;color:#444}
+.ci{width:30px;height:30px;background:#f0f8ec;border:1px solid #d0ecc0;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.82rem;flex-shrink:0;color:var(--green)}
+.contact-list a{color:#444;transition:color .2s}
+.contact-list a:hover{color:var(--green)}
+.contact-form{}
+.contact-form h3{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.5rem;letter-spacing:.04em;text-transform:uppercase;color:#111;margin-bottom:1.2rem}
+.form-row{display:flex;flex-direction:column;gap:.8rem}
+.form-input{
+  width:100%;padding:11px 14px;border:1px solid #ddd;border-radius:7px;
+  font-family:'Exo 2',sans-serif;font-size:.9rem;color:#333;background:#fff;
+  transition:border-color .25s,box-shadow .25s;outline:none;
+}
+.form-input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(76,175,40,.12)}
+.form-input::placeholder{color:#bbb}
+textarea.form-input{resize:vertical;min-height:90px}
+.btn-submit{width:100%;background:var(--green);color:#fff;border:none;padding:12px;border-radius:7px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .28s;margin-top:.3rem}
+.btn-submit:hover{background:var(--green-d);transform:translateY(-1px)}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer{background:var(--darker);padding:55px 4vw 24px;border-top:2px solid var(--green)}
+.footer-top{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1.4fr;gap:2.5rem;margin-bottom:2.5rem}
+.footer-brand img{height:48px;width:auto;background:#fff;border-radius:8px;padding:5px 10px;object-fit:contain;margin-bottom:1rem}
+.footer-tagline{font-size:.83rem;color:rgba(255,255,255,.38);line-height:1.65;margin-bottom:1.2rem}
+.footer-social{display:flex;gap:.5rem;flex-wrap:wrap}
+.fsoc{
+  width:32px;height:32px;border-radius:7px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.72rem;font-weight:700;cursor:pointer;transition:all .22s;
+  border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.7);
+}
+.fsoc:hover{transform:translateY(-2px)}
+.footer-col h4{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:1rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.footer-col a{font-size:.83rem;color:rgba(255,255,255,.38);transition:color .2s}
+.footer-col a:hover{color:var(--green)}
+.footer-newsletter{}
+.footer-newsletter p{font-size:.83rem;color:rgba(255,255,255,.4);line-height:1.6;margin-bottom:1rem}
+.newsletter-form{display:flex;gap:0;border-radius:6px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+.newsletter-input{flex:1;padding:10px 12px;background:rgba(255,255,255,.06);border:none;color:#fff;font-family:'Exo 2',sans-serif;font-size:.83rem;outline:none}
+.newsletter-input::placeholder{color:rgba(255,255,255,.3)}
+.newsletter-btn{background:var(--green);border:none;padding:10px 14px;color:#fff;cursor:pointer;font-size:.9rem;transition:background .2s}
+.newsletter-btn:hover{background:var(--orange)}
+.footer-pay{display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap}
+.pay-badge{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:4px 8px;font-size:.65rem;font-weight:700;letter-spacing:.08em;color:rgba(255,255,255,.5)}
+.footer-bottom{max-width:1300px;margin:0 auto;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem}
+.footer-bottom p{font-size:.75rem;color:rgba(255,255,255,.22)}
+.footer-bottom span{color:var(--orange)}
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:1000px){
+  .viewer-inner,.about-inner,.contact-inner{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .slide-img{height:55%;right:2vw}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .top-left .hide-mob{display:none}
+  .slide-img{display:none}
+  .slide-content{padding:0 6vw}
+  .prod-grid{grid-template-columns:1fr 1fr}
+  .footer-top{grid-template-columns:1fr}
+  .stats-inner{gap:1.5rem}
+  .about-badge{display:none}
+}
+@media(max-width:480px){
+  .slide h1{font-size:2.6rem}
+  .prod-grid{grid-template-columns:1fr}
+  .cat-grid{grid-template-columns:1fr 1fr}
+  .slide-btns{flex-direction:column}
+  .btn-primary,.btn-outline{justify-content:center}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════
+     TOP SOCIAL BAR
+════════════════════════════ -->
+<div class="top-bar">
+  <div class="top-left">
+    <span>📞 <a href="tel:+918485968195">+91 84859 68195</a></span>
+    <span class="hide-mob">✉️ <a href="mailto:ride@zestbicycles.com">ride@zestbicycles.com</a></span>
+    <span class="hide-mob">📍 Lodra, Gandhinagar – 382835</span>
+  </div>
+  <div class="top-socials">
+    <span style="color:rgba(255,255,255,.35);font-size:.7rem;letter-spacing:.1em;margin-right:4px">FOLLOW US</span>
+    <a href="#" class="fsoc soc-fb" title="Facebook">f</a>
+    <a href="#" class="fsoc soc-ig" title="Instagram">in</a>
+    <a href="#" class="fsoc soc-yt" title="YouTube">▶</a>
+    <a href="#" class="fsoc soc-tw" title="Twitter">tw</a>
+    <a href="#" class="fsoc soc-wa" title="WhatsApp">wa</a>
+    <div class="top-divider"></div>
+    <a href="https://www.zestbicycles.com" target="_blank" style="color:rgba(255,255,255,.45);font-size:.7rem;letter-spacing:.06em">🌐 zestbicycles.com</a>
+  </div>
+</div>
+
+<!-- ════════════════════════════
+     NAV
+════════════════════════════ -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="/mnt/user-data/uploads/1000043954.jpg" alt="Zest Bicycles">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#categories">Category</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#viewer">360° View</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-icon-btn" title="Search">🔍</div>
+      <div class="nav-icon-btn" title="Account">👤</div>
+      <div class="nav-icon-btn" title="Cart">
+        🛒<span class="cart-count">3</span>
+      </div>
+      <button class="btn-shop-nav" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+      <button class="hamburger" id="ham" onclick="toggleMob()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="#home" onclick="toggleMob()">Home</a>
+  <a href="#categories" onclick="toggleMob()">Category</a>
+  <a href="#products" onclick="toggleMob()">Products</a>
+  <a href="#viewer" onclick="toggleMob()">360° View</a>
+  <a href="#about" onclick="toggleMob()">About</a>
+  <a href="#contact" onclick="toggleMob()">Contact</a>
+</div>
+
+<!-- ════════════════════════════
+     HERO SLIDER
+════════════════════════════ -->
+<section class="hero" id="home">
+  <!-- SLIDE 1 -->
+  <div class="slide active">
+    <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&h=900&fit=crop')"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="slide-tag"><i></i> New Collection 2026</div>
+      <h1>RIDE BEYOND<br><span>YOUR LIMITS</span></h1>
+      <p>High performance cycles for every adventure. Built in Gujarat, loved across India.</p>
+      <div class="slide-btns">
+        <a href="#products" class="btn-primary">Explore Now →</a>
+        <a href="#viewer" class="btn-outline">▶ 360° View</a>
+      </div>
+    </div>
+    <div class="slide-img">
+      <img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=700&h=700&fit=crop&bg=transparent" alt="Mountain Bike">
+    </div>
+  </div>
+
+  <!-- SLIDE 2 -->
+  <div class="slide">
+    <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=1600&h=900&fit=crop')"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="slide-tag"><i></i> Best Seller</div>
+      <h1>BUILT FOR<br><span>EVERY TRAIL</span></h1>
+      <p>Engineered for speed, comfort and durability — from city streets to mountain trails.</p>
+      <div class="slide-btns">
+        <a href="#products" class="btn-primary">Shop Now →</a>
+        <a href="#about" class="btn-outline">Our Story</a>
+      </div>
+    </div>
+    <div class="slide-img">
+      <img src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=700&h=700&fit=crop" alt="Road Bike">
+    </div>
+  </div>
+
+  <!-- SLIDE 3 -->
+  <div class="slide">
+    <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?w=1600&h=900&fit=crop')"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="slide-tag"><i></i> Electric Range</div>
+      <h1>GO ELECTRIC<br><span>GO ZEST</span></h1>
+      <p>The future of cycling is here — Zest E-Bikes for effortless rides, every single day.</p>
+      <div class="slide-btns">
+        <a href="#products" class="btn-primary">View E-Bikes →</a>
+        <a href="#contact" class="btn-outline">Get a Quote</a>
+      </div>
+    </div>
+    <div class="slide-img">
+      <img src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?w=700&h=700&fit=crop" alt="Electric Bike">
+    </div>
+  </div>
+
+  <!-- controls -->
+  <div class="slider-arrow arrow-prev" onclick="changeSlide(-1)">‹</div>
+  <div class="slider-arrow arrow-next" onclick="changeSlide(1)">›</div>
+  <div class="slider-dots">
+    <div class="dot active" onclick="goSlide(0)"></div>
+    <div class="dot" onclick="goSlide(1)"></div>
+    <div class="dot" onclick="goSlide(2)"></div>
+  </div>
+</section>
+
+<!-- ════════════════════════════
+     CATEGORIES
+════════════════════════════ -->
+<section class="section" id="categories">
+  <div class="sec-wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag-sm">Shop By Category</div>
+      <h2 class="sec-title">Explore Our <span>Categories</span></h2>
+      <div class="sec-divider"><span class="icon">🚴</span></div>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card reveal" style="transition-delay:.04s">
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=360&h=270&fit=crop" alt="Mountain Bikes" loading="lazy"></div>
+        <div class="cat-name">Mountain Bikes</div>
+        <div class="cat-link">Explore <span>→</span></div>
+      </div>
+      <div class="cat-card reveal" style="transition-delay:.08s">
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=360&h=270&fit=crop" alt="Road Bikes" loading="lazy"></div>
+        <div class="cat-name">Road Bikes</div>
+        <div class="cat-link">Explore <span>→</span></div>
+      </div>
+      <div class="cat-card reveal" style="transition-delay:.12s">
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?w=360&h=270&fit=crop" alt="City Bikes" loading="lazy"></div>
+        <div class="cat-name">City Bikes</div>
+        <div class="cat-link">Explore <span>→</span></div>
+      </div>
+      <div class="cat-card reveal" style="transition-delay:.16s">
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1510006745434-ba2b0b7e2c81?w=360&h=270&fit=crop" alt="Kids Bikes" loading="lazy"></div>
+        <div class="cat-name">Kids Bikes</div>
+        <div class="cat-link">Explore <span>→</span></div>
+      </div>
+      <div class="cat-card reveal" style="transition-delay:.2s">
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=360&h=270&fit=crop" alt="Electric Bikes" loading="lazy"></div>
+        <div class="cat-name">Electric Bikes</div>
+        <div class="cat-link">Explore <span>→</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════
+     FEATURED PRODUCTS
+════════════════════════════ -->
+<section class="products-sec" id="products">
+  <div class="sec-wrap">
+    <div class="prod-head-row reveal">
+      <div>
+        <div class="sec-tag-sm">Best Sellers</div>
+        <h2 class="sec-title" style="color:#fff">Featured <span>Products</span></h2>
+      </div>
+      <a href="#" class="view-all">View All Products →</a>
+    </div>
+    <div class="prod-grid">
+      <div class="prod-card reveal" style="transition-delay:.05s">
+        <div class="prod-img">
+          <img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=480&h=360&fit=crop" alt="Zest Sprint Pro" loading="lazy">
+          <div class="prod-badge">Hot</div>
+          <div class="prod-wish" onclick="toggleWish(this)">♡</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-name">Zest Sprint Pro</div>
+          <div class="prod-stars">★★★★★ <span>(124)</span></div>
+          <div class="prod-price">₹14,999 <s>₹18,000</s></div>
+          <div class="prod-actions">
+            <button class="btn-details">View Details</button>
+            <button class="btn-cart">🛒</button>
+          </div>
+        </div>
+      </div>
+      <div class="prod-card reveal" style="transition-delay:.1s">
+        <div class="prod-img">
+          <img src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=480&h=360&fit=crop" alt="Rocky Trail" loading="lazy">
+          <div class="prod-badge new">New</div>
+          <div class="prod-wish" onclick="toggleWish(this)">♡</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-name">Zest Rocky Trail</div>
+          <div class="prod-stars">★★★★★ <span>(98)</span></div>
+          <div class="prod-price">₹16,999 <s>₹21,000</s></div>
+          <div class="prod-actions">
+            <button class="btn-details">View Details</button>
+            <button class="btn-cart">🛒</button>
+          </div>
+        </div>
+      </div>
+      <div class="prod-card reveal" style="transition-delay:.15s">
+        <div class="prod-img">
+          <img src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?w=480&h=360&fit=crop" alt="City Stryder" loading="lazy">
+          <div class="prod-wish" onclick="toggleWish(this)">♡</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-name">Zest City Stryder</div>
+          <div class="prod-stars">★★★★☆ <span>(76)</span></div>
+          <div class="prod-price">₹13,499 <s>₹16,500</s></div>
+          <div class="prod-actions">
+            <button class="btn-details">View Details</button>
+            <button class="btn-cart">🛒</button>
+          </div>
+        </div>
+      </div>
+      <div class="prod-card reveal" style="transition-delay:.2s">
+        <div class="prod-img">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=480&h=360&fit=crop" alt="E-Ride" loading="lazy">
+          <div class="prod-badge elec">Electric</div>
+          <div class="prod-wish" onclick="toggleWish(this)">♡</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-name">Zest E-Ride Pro</div>
+          <div class="prod-stars">★★★★★ <span>(63)</span></div>
+          <div class="prod-price">₹49,999 <s>₹62,000</s></div>
+          <div class="prod-actions">
+            <button class="btn-details">View Details</button>
+            <button class="btn-cart">🛒</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════
+     360° VIEWER
+════════════════════════════ -->
+<section class="viewer-sec" id="viewer">
+  <div class="sec-wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag-sm">Interactive 360°</div>
+      <h2 class="sec-title">Experience Zest <span>Pro X1</span></h2>
+      <div class="sec-divider"><span class="icon">🔄</span></div>
+    </div>
+    <div class="viewer-inner">
+      <div class="viewer-stage reveal">
+        <!-- SVG CYCLE -->
+        <div class="cycle-360" id="c360">
+          <svg viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg" id="cSvg">
+            <defs>
+              <linearGradient id="fg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#4caf28" id="fg1"/>
+                <stop offset="100%" stop-color="#1a5c1a" id="fg2"/>
+              </linearGradient>
+              <linearGradient id="ag" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#f07820" id="ag1"/>
+                <stop offset="100%" stop-color="#d4a820" id="ag2"/>
+              </linearGradient>
+            </defs>
+            <!-- rear wheel -->
+            <circle cx="155" cy="230" r="95" fill="none" stroke="#ddd" stroke-width="16"/>
+            <circle cx="155" cy="230" r="95" fill="none" stroke="url(#fg)" stroke-width="3.5" opacity=".9"/>
+            <g stroke="rgba(100,150,100,0.3)" stroke-width="1.2">
+              <line x1="155" y1="230" x2="155" y2="135"/><line x1="155" y1="230" x2="155" y2="325"/>
+              <line x1="155" y1="230" x2="60" y2="230"/><line x1="155" y1="230" x2="250" y2="230"/>
+              <line x1="155" y1="230" x2="88" y2="163"/><line x1="155" y1="230" x2="222" y2="297"/>
+              <line x1="155" y1="230" x2="222" y2="163"/><line x1="155" y1="230" x2="88" y2="297"/>
+              <line x1="155" y1="230" x2="120" y2="143"/><line x1="155" y1="230" x2="190" y2="317"/>
+              <line x1="155" y1="230" x2="62" y2="196"/><line x1="155" y1="230" x2="248" y2="264"/>
+            </g>
+            <circle cx="155" cy="230" r="10" fill="url(#fg)"/>
+            <circle cx="155" cy="230" r="5" fill="rgba(255,255,255,.9)"/>
+            <!-- front wheel -->
+            <circle cx="445" cy="230" r="95" fill="none" stroke="#ddd" stroke-width="16"/>
+            <circle cx="445" cy="230" r="95" fill="none" stroke="url(#fg)" stroke-width="3.5" opacity=".9"/>
+            <g stroke="rgba(100,150,100,0.3)" stroke-width="1.2">
+              <line x1="445" y1="230" x2="445" y2="135"/><line x1="445" y1="230" x2="445" y2="325"/>
+              <line x1="445" y1="230" x2="350" y2="230"/><line x1="445" y1="230" x2="540" y2="230"/>
+              <line x1="445" y1="230" x2="378" y2="163"/><line x1="445" y1="230" x2="512" y2="297"/>
+              <line x1="445" y1="230" x2="512" y2="163"/><line x1="445" y1="230" x2="378" y2="297"/>
+              <line x1="445" y1="230" x2="410" y2="143"/><line x1="445" y1="230" x2="480" y2="317"/>
+              <line x1="445" y1="230" x2="352" y2="196"/><line x1="445" y1="230" x2="538" y2="264"/>
+            </g>
+            <circle cx="445" cy="230" r="10" fill="url(#fg)"/>
+            <circle cx="445" cy="230" r="5" fill="rgba(255,255,255,.9)"/>
+            <!-- frame -->
+            <line x1="418" y1="115" x2="252" y2="230" stroke="url(#fg)" stroke-width="13" stroke-linecap="round"/>
+            <line x1="415" y1="108" x2="268" y2="125" stroke="url(#fg)" stroke-width="10" stroke-linecap="round"/>
+            <line x1="252" y1="230" x2="268" y2="125" stroke="url(#fg)" stroke-width="10" stroke-linecap="round"/>
+            <line x1="252" y1="230" x2="155" y2="230" stroke="url(#fg)" stroke-width="9" stroke-linecap="round"/>
+            <line x1="268" y1="130" x2="155" y2="230" stroke="url(#fg)" stroke-width="7" stroke-linecap="round"/>
+            <path d="M418,115 Q430,165 445,230" fill="none" stroke="url(#fg)" stroke-width="10" stroke-linecap="round"/>
+            <!-- accent stripe -->
+            <line x1="418" y1="115" x2="252" y2="230" stroke="url(#ag)" stroke-width="3" opacity=".7" stroke-linecap="round"/>
+            <line x1="415" y1="108" x2="268" y2="125" stroke="url(#ag)" stroke-width="2" opacity=".5" stroke-linecap="round"/>
+            <!-- head tube -->
+            <rect x="410" y="100" width="18" height="50" rx="6" fill="url(#fg)"/>
+            <!-- BB -->
+            <circle cx="252" cy="230" r="16" fill="url(#fg)" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+            <circle cx="252" cy="230" r="7" fill="rgba(255,255,255,.2)"/>
+            <!-- chainring -->
+            <circle cx="252" cy="230" r="32" fill="none" stroke="url(#ag)" stroke-width="4" opacity=".9"/>
+            <circle cx="252" cy="230" r="22" fill="none" stroke="rgba(240,120,32,.35)" stroke-width="2"/>
+            <!-- cranks -->
+            <line x1="252" y1="230" x2="272" y2="260" stroke="url(#ag)" stroke-width="7" stroke-linecap="round"/>
+            <line x1="252" y1="230" x2="232" y2="200" stroke="url(#ag)" stroke-width="7" stroke-linecap="round"/>
+            <rect x="266" y="262" width="22" height="6" rx="3" fill="url(#ag)"/>
+            <rect x="215" y="196" width="22" height="6" rx="3" fill="url(#ag)"/>
+            <!-- chain -->
+            <path d="M252 258 Q300 280 360 268 Q400 258 430 238" fill="none" stroke="rgba(100,100,100,0.3)" stroke-width="3" stroke-dasharray="6 3"/>
+            <!-- seat post & saddle -->
+            <line x1="268" y1="125" x2="262" y2="78" stroke="#888" stroke-width="7" stroke-linecap="round"/>
+            <path d="M242,72 Q262,60 286,68 Q275,80 252,80 Z" fill="url(#fg)" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+            <path d="M242,72 Q255,78 270,74" fill="none" stroke="url(#ag)" stroke-width="2"/>
+            <!-- handlebar -->
+            <line x1="418" y1="100" x2="415" y2="62" stroke="#888" stroke-width="7" stroke-linecap="round"/>
+            <path d="M390,60 Q415,52 440,60 Q445,72 438,80 Q430,85 424,75" fill="none" stroke="url(#fg)" stroke-width="8" stroke-linecap="round"/>
+            <!-- shadow -->
+            <ellipse cx="300" cy="332" rx="180" ry="7" fill="rgba(0,0,0,0.12)"/>
+          </svg>
+        </div>
+        <!-- color picker -->
+        <div class="viewer-controls">
+          <div class="color-dot active" style="background:linear-gradient(135deg,#4caf28,#1a5c1a)" onclick="setClr(0,'#4caf28','#1a5c1a','#f07820','#d4a820','Forest Green')" title="Forest Green"></div>
+          <div class="color-dot" style="background:linear-gradient(135deg,#f07820,#b85010)" onclick="setClr(1,'#f07820','#b85010','#f5d020','#c8a020','Blazing Orange')" title="Blazing Orange"></div>
+          <div class="color-dot" style="background:linear-gradient(135deg,#3060e0,#102080)" onclick="setClr(2,'#3060e0','#102080','#20c8f0','#1060b0','Deep Blue')" title="Deep Blue"></div>
+          <div class="color-dot" style="background:linear-gradient(135deg,#c03030,#801010)" onclick="setClr(3,'#c03030','#801010','#f07820','#d4a820','Racing Red')" title="Racing Red"></div>
+          <div class="color-dot" style="background:linear-gradient(135deg,#444,#111)" onclick="setClr(4,'#444','#111','#888','#555','Stealth Black')" title="Stealth Black"></div>
+        </div>
+        <div class="selected-color-name" id="colorName">Forest Green</div>
+        <div class="viewer-hint">↔ Drag to Rotate 360°</div>
+        <div class="rot-track"><div class="rot-fill" id="rotFill"></div></div>
+      </div>
+      <div class="viewer-info reveal" style="transition-delay:.2s">
+        <div class="sec-tag-sm">Featured Model</div>
+        <h3>Zest <span>Pro X1</span></h3>
+        <p>Our flagship cycle — crafted for speed, comfort and style. The Pro X1 delivers race-grade performance in a road-ready package.</p>
+        <div class="spec-list">
+          <div class="spec-item"><div class="spec-icon">⚖️</div><span class="spec-label">Weight</span><span class="spec-val">9.2 kg</span></div>
+          <div class="spec-item"><div class="spec-icon">⚙️</div><span class="spec-label">Gears</span><span class="spec-val">21 Speed Shimano</span></div>
+          <div class="spec-item"><div class="spec-icon">🛞</div><span class="spec-label">Wheel Size</span><span class="spec-val">29" Alloy</span></div>
+          <div class="spec-item"><div class="spec-icon">🏗️</div><span class="spec-label">Frame</span><span class="spec-val">Aluminium 6061</span></div>
+          <div class="spec-item"><div class="spec-icon">💰</div><span class="spec-label">Price</span><span class="spec-val" style="color:var(--green);font-size:1.1rem">₹16,999</span></div>
+        </div>
+        <a href="#contact" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px">Get This Cycle →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════
+     STATS
+════════════════════════════ -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="stat-num" id="s1">0+</div><div class="stat-lbl">Models Available</div></div>
+    <div class="stat-item"><div class="stat-num" id="s2">0+</div><div class="stat-lbl">Cities Served</div></div>
+    <div class="stat-item"><div class="stat-num" id="s3">0K+</div><div class="stat-lbl">Happy Riders</div></div>
+    <div class="stat-item"><div class="stat-num">5★</div><div class="stat-lbl">Customer Rating</div></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════
+     ABOUT
+════════════════════════════ -->
+<section class="about-sec" id="about">
+  <div class="about-inner">
+    <div class="about-visual reveal">
+      <div class="about-main-img">
+        <img src="https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=700&h=520&fit=crop" alt="Rider" loading="lazy">
+        <div class="play-wrap">
+          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+      </div>
+      <div class="about-badge">
+        <div class="num">10+</div>
+        <div class="lbl">Years Experience</div>
+      </div>
+    </div>
+    <div class="about-info reveal" style="transition-delay:.2s">
+      <div class="sec-tag-sm">About Us</div>
+      <h2 class="sec-title" style="text-align:left">We Build Bikes For <span>Better Tomorrow</span></h2>
+      <p style="color:#666;font-size:.95rem;line-height:1.75;margin-top:1rem">We are passionate about creating high quality cycles that combine performance, comfort and durability. Our mission is to inspire people to ride more and live healthier. Under Chairman Mr. Tejas Patel, every Zest bicycle is tested across Gujarat's roads.</p>
+      <div class="about-icons">
+        <div class="aico"><div class="aico-box">🏆</div><div class="aico-text"><div class="aico-title">Premium Quality</div><div class="aico-sub">Best-in-class materials</div></div></div>
+        <div class="aico"><div class="aico-box">💪</div><div class="aico-text"><div class="aico-title">Durable & Strong</div><div class="aico-sub">Built to last for years</div></div></div>
+        <div class="aico"><div class="aico-box">⚡</div><div class="aico-text"><div class="aico-title">Light Weight</div><div class="aico-sub">Alloy & carbon frames</div></div></div>
+        <div class="aico"><div class="aico-box">😊</div><div class="aico-text"><div class="aico-title">Comfort Ride</div><div class="aico-sub">Ergonomic design</div></div></div>
+      </div>
+      <button class="btn-readmore" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Read More →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════
+     CONTACT
+════════════════════════════ -->
+<section class="contact-sec" id="contact">
+  <div class="sec-wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag-sm">Get In Touch</div>
+      <h2 class="sec-title">Contact <span>Us</span></h2>
+      <div class="sec-divider"><span class="icon">✉️</span></div>
+    </div>
+    <div class="contact-inner">
+      <!-- Business Card -->
+      <div class="biz-card reveal">
+        <div class="biz-card-top">
+          <img src="/mnt/user-data/uploads/1000043954.jpg" alt="Zest Bicycles">
+          <div class="biz-card-name">
+            <strong>Mr. Tejas Patel</strong>
+            <span>Chairman, Zest Bicycles</span>
+          </div>
+        </div>
+        <div class="biz-card-body">
+          <svg class="biz-stripe" viewBox="0 0 300 300" fill="none">
+            <path d="M300,300 Q200,200 0,250" stroke="#3a8c1a" stroke-width="55" fill="none"/>
+            <path d="M300,300 Q220,180 20,240" stroke="#6ab820" stroke-width="28" fill="none"/>
+            <path d="M300,300 Q240,160 40,230" stroke="#e87020" stroke-width="12" fill="none"/>
+          </svg>
+          <ul class="contact-list">
+            <li><div class="ci">📞</div><a href="tel:+918485968195">+91 84859 68195</a></li>
+            <li><div class="ci">🌐</div><a href="https://www.zestbicycles.com" target="_blank">www.zestbicycles.com</a></li>
+            <li><div class="ci">✉️</div><a href="mailto:ride@zestbicycles.com">ride@zestbicycles.com</a></li>
+            <li><div class="ci">📍</div><span>Lodra, Gandhinagar – 382835</span></li>
+          </ul>
+        </div>
+      </div>
+      <!-- Form -->
+      <div class="contact-form reveal" style="transition-delay:.2s">
+        <h3>Send a <span style="color:var(--green)">Message</span></h3>
+        <div class="form-row">
+          <input class="form-input" type="text" placeholder="Your Full Name">
+          <input class="form-input" type="email" placeholder="Email Address">
+          <input class="form-input" type="tel" placeholder="Phone Number">
+          <select class="form-input" style="color:#555;cursor:pointer">
+            <option value="">Select Enquiry Type</option>
+            <option>Wholesale / Dealership</option>
+            <option>Test Ride Request</option>
+            <option>Bulk Order</option>
+            <option>General Enquiry</option>
+          </select>
+          <textarea class="form-input" placeholder="Your Message..."></textarea>
+          <button class="btn-submit">Send Message →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════
+     FOOTER
+════════════════════════════ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="/mnt/user-data/uploads/1000043954.jpg" alt="Zest Bicycles">
+      <p class="footer-tagline">Your trusted partner for premium bicycles. Ride more, worry less.</p>
+      <div class="footer-social">
+        <a href="#" class="fsoc soc-fb">f</a>
+        <a href="#" class="fsoc soc-ig">in</a>
+        <a href="#" class="fsoc soc-yt">▶</a>
+        <a href="#" class="fsoc soc-tw">tw</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#categories">Category</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Customer Service</h4>
+      <ul>
+        <li><a href="#">Shipping & Delivery</a></li>
+        <li><a href="#">Returns & Refunds</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">FAQ's</a></li>
+      </ul>
+    </div>
+    <div class="footer-col footer-newsletter">
+      <h4>Newsletter</h4>
+      <p>Subscribe to get updates on new arrivals & offers.</p>
+      <div class="newsletter-form">
+        <input class="newsletter-input" type="email" placeholder="Enter your email">
+        <button class="newsletter-btn">→</button>
+      </div>
+      <div class="footer-pay">
+        <span class="pay-badge">VISA</span>
+        <span class="pay-badge">Mastercard</span>
+        <span class="pay-badge">UPI</span>
+        <span class="pay-badge">Paytm</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Zest Bicycles · DB: <span>zestcycles</span> · All Rights Reserved</p>
+    <p>Made with <span>♥</span> in Gandhinagar, Gujarat</p>
+  </div>
+</footer>
+
+<script>
+/* ── MOBILE MENU ── */
+function toggleMob(){
+  document.getElementById('ham').classList.toggle('open');
+  document.getElementById('mobMenu').classList.toggle('open');
+}
+
+/* ── SLIDER ── */
+let cur=0;const slides=document.querySelectorAll('.slide');const dots=document.querySelectorAll('.dot');
+function showSlide(n){
+  slides[cur].classList.remove('active');dots[cur].classList.remove('active');
+  cur=(n+slides.length)%slides.length;
+  slides[cur].classList.add('active');dots[cur].classList.add('active');
+}
+function changeSlide(d){showSlide(cur+d)}
+function goSlide(n){showSlide(n)}
+setInterval(()=>changeSlide(1),5000);
+
+/* ── SCROLL REVEAL ── */
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+/* ── COUNTERS ── */
+function cnt(id,to,suf){
+  let v=0;const el=document.getElementById(id);const step=to/55;
+  const t=setInterval(()=>{v+=step;if(v>=to){v=to;clearInterval(t)}el.textContent=Math.floor(v)+suf},22);
+}
+const sObs=new IntersectionObserver(([e])=>{
+  if(e.isIntersecting){cnt('s1',50,'+');cnt('s2',15,'+');cnt('s3',5,'K+');sObs.disconnect()}
+},{threshold:.4});
+sObs.observe(document.querySelector('.stats-bar'));
+
+/* ── 360° DRAG ── */
+const stage=document.getElementById('c360');
+const svg=document.getElementById('cSvg');
+const rotFill=document.getElementById('rotFill');
+let drag=false,sx=0,ang=0,tot=0;
+stage.addEventListener('mousedown',e=>{drag=true;sx=e.clientX});
+document.addEventListener('mousemove',e=>{
+  if(!drag)return;
+  const dx=e.clientX-sx;ang=tot+dx*0.55;
+  const sc=0.8+0.2*Math.cos(ang*Math.PI/180);
+  const sk=Math.sin(ang*Math.PI/180)*5;
+  svg.style.transform=`scaleX(${sc}) skewY(${sk}deg)`;
+  const norm=((ang%360)+360)%360;
+  rotFill.style.marginLeft=Math.round((norm/360)*130)+'px';
+});
+document.addEventListener('mouseup',()=>{if(drag){tot=ang;drag=false}});
+stage.addEventListener('touchstart',e=>{drag=true;sx=e.touches[0].clientX},{passive:true});
+document.addEventListener('touchmove',e=>{
+  if(!drag)return;
+  const dx=e.touches[0].clientX-sx;ang=tot+dx*0.6;
+  const sc=0.8+0.2*Math.cos(ang*Math.PI/180);
+  const sk=Math.sin(ang*Math.PI/180)*5;
+  svg.style.transform=`scaleX(${sc}) skewY(${sk}deg)`;
+  const norm=((ang%360)+360)%360;
+  rotFill.style.marginLeft=Math.round((norm/360)*130)+'px';
+},{passive:true});
+document.addEventListener('touchend',()=>{if(drag){tot=ang;drag=false}});
+/* auto intro spin */
+let a=0;const sp=setInterval(()=>{
+  if(drag){clearInterval(sp);return}
+  a+=0.8;svg.style.transform=`scaleX(${0.8+0.2*Math.cos(a*Math.PI/180)}) skewY(${Math.sin(a*Math.PI/180)*5}deg)`;
+  rotFill.style.marginLeft=Math.round(((a%360)/360)*130)+'px';
+  if(a>=360){clearInterval(sp);svg.style.transform='';tot=0}
+},16);
+
+/* ── COLOR SWITCH ── */
+function setClr(idx,f1,f2,a1,a2,name){
+  document.querySelectorAll('.color-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+  document.getElementById('fg1').setAttribute('stop-color',f1);
+  document.getElementById('fg2').setAttribute('stop-color',f2);
+  document.getElementById('ag1').setAttribute('stop-color',a1);
+  document.getElementById('ag2').setAttribute('stop-color',a2);
+  document.getElementById('colorName').textContent=name;
+}
+
+/* ── WISHLIST ── */
+function toggleWish(el){
+  const liked=el.classList.toggle('liked');
+  el.textContent=liked?'♥':'♡';
+}
+
+/* ── NAV ACTIVE on scroll ── */
+const secs=['home','categories','products','viewer','about','contact'];
+window.addEventListener('scroll',()=>{
+  let cur='';
+  secs.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&window.scrollY>=el.offsetTop-120)cur=id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.classList.toggle('active',a.getAttribute('href')==='#'+cur);
+  });
+});
+</script>
+</body>
+</html>
